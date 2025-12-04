@@ -25,6 +25,11 @@
 #define SMMNODE_TYPE_FOODCHANCE			5
 #define SMMNODE_TYPE_FESTIVAL			6
 
+#define SMMNODE_OBJTYPE_BOARD	0
+#define SMMNODE_OBJTYPE_GRADE	1
+#define SMMNODE_OBJTYPE_FOOD	2
+#define SMMNODE_OBJTYPE_FEST	3
+
 /* grade :
     A+,
     A0,
@@ -36,14 +41,14 @@
     C0,
     C-
 */
-
+#define SMMNODE_MAX_GRADE       13
 
 
 //object generation
-int smmObj_genNode(char* name, int type, int credit, int energy);
+void* smmObj_genObject(char* name, int objType, int type, int credit, int energy, int grade);
 char* smmObj_getNodeName(int node_nr);
 int smmObj_getNodeType(int node_nr);
-int smmObj_getNodeEnergy(int node_nr);
+int smmObj_getObjectEnergy(int node_nr);
 int smmObj_getNodeCredit(int node_nr);
 char* smmObj_getTypeName(int node_type);
 //member retrieving
