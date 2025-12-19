@@ -31,25 +31,25 @@
 #define SMMNODE_OBJTYPE_FEST	3
 
 /* grade :
-    A+,
+    Ap,
     A0,
-    A-,
-    B+,
+    Am,
+    Bp,
     B0,
-    B-,
-    C+,
+    Bm,
+    Cp,
     C0,
-    C-
+    Cm
 */
 #define SMMNODE_MAX_GRADE       13
 
 
 //object generation
 void* smmObj_genObject(char* name, int objType, int type, int credit, int energy, int grade);
-char* smmObj_getNodeName(int node_nr);
-int smmObj_getNodeType(int node_nr);
-int smmObj_getObjectEnergy(int node_nr);
-int smmObj_getNodeCredit(int node_nr);
+char* smmObj_getNodeName(void *ptr);
+int smmObj_getNodeType(void *ptr);
+int smmObj_getObjectEnergy(void *ptr);
+int smmObj_getNodeCredit(void *ptr);
 char* smmObj_getTypeName(int node_type);
 //member retrieving
 
