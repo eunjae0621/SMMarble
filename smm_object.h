@@ -50,6 +50,7 @@ char* smmObj_getObjectName(void *ptr);
 int smmObj_getObjectType(void *ptr);
 int smmObj_getObjectEnergy(void *ptr);
 int smmObj_getObjectCredit(void *ptr);
+int smmObj_getObjectGrade(void *ptr);
 char* smmObj_getTypeName(int node_type);
 //member retrieving
 
@@ -57,5 +58,4 @@ char* smmObj_getTypeName(int node_type);
 //element to string
 
 
-
-#endif /* smm_object_h */
+#endif/* smm_object_h */

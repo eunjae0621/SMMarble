@@ -113,10 +113,18 @@ int smmObj_getObjectCredit(void *ptr)
 	return (objPtr->credit);
 }
 
+int smmObj_getObjectGrade(void *ptr)
+{
+	smmObj_object_t* objPtr = (smmObj_object_t*)ptr;
+	
+	return (objPtr->grade);	
+}
+
 char* smmObj_getTypeName(int node_type)
 {
 	return (smmObj_nodeName[node_type]);
 }
+
 
 #if 0
 //element to string
