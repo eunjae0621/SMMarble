@@ -15,18 +15,18 @@
 
 
 
-#define GRADE_A+		0
+#define GRADE_Ap		0
 #define GRADE_A0		1
-#define GRADE_A-		2
-#define GRADE_B+		3
+#define GRADE_Am		2
+#define GRADE_Bp		3
 #define GRADE_B0		4
-#define GRADE_B-		5
-#define GRADE_C+		6
+#define GRADE_Bm		5
+#define GRADE_Cp		6
 #define GRADE_C0		7
-#define GRADE_C-		8
-#define GRADE_D+		9
+#define GRADE_Cm		8
+#define GRADE_Dp		9
 #define GRADE_D0		10
-#define GRADE_D-		11
+#define GRADE_Dm		11
 #define GRADE_F			12
 
 
@@ -40,7 +40,7 @@ static char smmObj_nodeName[MAX_NODETYPE][MAX_CHARNAME] = {
 	"festival"
 };
 
-static char smmObj_gradeName[MAX_GRADE][MAX_CHARNAME] = {
+static char smmObj_gradeName[SMMNODE_MAX_GRADE][MAX_CHARNAME] = {
 	"A+",
 	"A0",
 	"A-",

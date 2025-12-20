@@ -83,7 +83,7 @@ void goForward(int player, int step)
 	//player_pos[player] = player_pos[player] + step;
 	ptr = smmdb_getData(LISTNO_NODE,smm_players[player].pos);
 	
-	printf("start from %i(%S) (%i)\n", smm_players[player].pos, smmObj_getObjectName(ptr), step);
+	printf("start from %i(%s) (%i)\n", smm_players[player].pos, smmObj_getObjectName(ptr), step);
 	
 	for (i=0; i<step; i++) {
 		smm_players[player].pos = (smm_players[player].pos + 1)%smm_board_nr;
@@ -95,7 +95,7 @@ void printPlayerStatus(void)
 {
 	int i;
 	for	(i=0; i<smm_player_nr; i++) {
-		printf("%s - position : %i(%s), credit : %i, energy : %i\n", smm_players[i].name, smm_players[i].pos, smmObj_getNodeName(smm_players[i].pos), smm_players[i].credit, smm_players[i].energy);	
+		printf("%s - position : %i(%s), credit : %i, energy : %i\n", smm_players[i].name, smm_players[i].pos, smmObj_getObjectName(smm_players[i].pos), smm_players[i].credit, smm_players[i].energy);	
 	}
 }
 
@@ -125,11 +125,10 @@ int rolldie(int player)
     c = getchar();
     fflush(stdin);
     
-#if 1
+#if 0
     if (c == 'g')
         printGrades(player);
-#endif
-    
+#endif    
     return (rand()%MAX_DIE + 1);
 }
 
@@ -137,30 +136,43 @@ int rolldie(int player)
 void actionNode(int player)
 {
 	void *ptr = smmdb_getData(LISTNO_NODE, smm_players[player].pos);
-	int type = smmObj_getNodeType(smm_players[player].pos);
-	int credit = smmObj_getNodeCredit(smm_players[player].pos);
-    int	energy = smmObj_getNodeEnergy(smm_players[player].pos);
+	int type = smmObj_getObjectType(smm_players[player].pos);
+	int credit = smmObj_getObjectCredit(smm_players[player].pos);
+    int	energy = smmObj_getObjectEnergy(smm_players[player].pos);
     int grade;
 	void *gradePtr;
+	
     switch(type)
     {
-    	case SMMNODE_TYPE_LECTURE:
-    	if (findGrade(,) == NULL )
-		{
+		case SMMNODE_TYPE_LECTURE:
+    	{
+			//이미 수강한 강의면 바로 종료 
+    		if (findGrade(player, smmObj_getObjectName(ptr)) != NULL ) {
+    			printf("%s : already took lecture %s.\n", smm_players[player].name, smmObj_getObjectName(ptr));
+    			break;
+			}
+			
+			//에너지 부족하면 수강 불가 
+			if (smm_players[player].energy < energy) {
+				printf("%s : not enough energy to take %s.\n", smm_players[player].name, smmObj_getObjectName(ptr));
+				break;
+			} 
+			
 			smm_players[player].credit += credit;
     		smm_players[player].energy -= energy;
     		
     		grade = rand()%SMMNODE_MAX_GRADE;
     		
-    		gradePtr =smmObj_genObject(smmObj_getObjectName(ptr), SMMNODE_OBJTYPE_GRADE, type, credit, energy, int grade);
+    		gradePtr = smmObj_genObject(smmObj_getObjectName(ptr), SMMNODE_OBJTYPE_GRADE, type, credit, energy, grade);
     		
     		smmdb_addTail(LISTNO_OFFSET_GRADE+player, gradePtr);
+    		
+    		break;
 		}	
-    		
-			break;
-    		
+    		 		
 		case SMMNODE_TYPE_RESTAURANT:
 			smm_players[player].energy += energy;
+			printf("%s : ate food, energy +%d -> %d\n", smm_players[player].name, energy, smm_players[player].energy);
 			break;
 						
 		case SMMNODE_TYPE_LABORATORY:
@@ -168,7 +180,9 @@ void actionNode(int player)
 					
 		case SMMNODE_TYPE_HOME:	
 			smm_players[player].energy += energy;
-			if (smm_players[player].credit <= GRADUATE_CREDIT)
+			printf("%s : at home, energy +%d -> %d\n", smm_players[player].name, energy, smm_players[player].energy);
+			
+			if (smm_players[player].credit >= GRADUATE_CREDIT)
 			{
 				smm_players[player].flag_graduated = 1;
 			}

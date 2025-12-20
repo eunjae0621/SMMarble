@@ -46,10 +46,10 @@
 
 //object generation
 void* smmObj_genObject(char* name, int objType, int type, int credit, int energy, int grade);
-char* smmObj_getNodeName(void *ptr);
-int smmObj_getNodeType(void *ptr);
+char* smmObj_getObjectName(void *ptr);
+int smmObj_getObjectType(void *ptr);
 int smmObj_getObjectEnergy(void *ptr);
-int smmObj_getNodeCredit(void *ptr);
+int smmObj_getObjectCredit(void *ptr);
 char* smmObj_getTypeName(int node_type);
 //member retrieving
 
