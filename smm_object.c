@@ -9,12 +9,6 @@
 #include "smm_object.h"
 #include <string.h>
 
-#define MAX_NODENR		100
-#define MAX_NODETYPE    7
-
-
-
-
 #define GRADE_Ap		0
 #define GRADE_A0		1
 #define GRADE_Am		2
@@ -29,6 +23,8 @@
 #define GRADE_Dm		11
 #define GRADE_F			12
 
+#define MAX_NODENR		100
+#define MAX_NODETYPE    7
 
 static char smmObj_nodeName[MAX_NODETYPE][MAX_CHARNAME] = {
 	"lecture",
@@ -40,7 +36,7 @@ static char smmObj_nodeName[MAX_NODETYPE][MAX_CHARNAME] = {
 	"festival"
 };
 
-static char smmObj_gradeName[SMMNODE_MAX_GRADE][MAX_CHARNAME] = {
+static char smmObj_GradeName[SMMNODE_MAX_GRADE][MAX_CHARNAME] = {
 	"A+",
 	"A0",
 	"A-",
@@ -125,11 +121,8 @@ char* smmObj_getTypeName(int node_type)
 	return (smmObj_nodeName[node_type]);
 }
 
-
-#if 0
 //element to string
-char* smmObj_getGradeName(smmGrade_e grade)
+char* smmObj_getGradeName(int grade)
 {
-    return smmGradeName[grade];
+    return smmObj_GradeName[grade];
 }
-#endif

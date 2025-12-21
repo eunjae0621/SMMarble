@@ -44,6 +44,23 @@
 #define SMMNODE_MAX_GRADE       13
 
 
+
+typedef enum {
+	GRADE_Ap = 0,
+	GRADE_A0,		
+	GRADE_Am,		
+	GRADE_Bp,		
+	GRADE_B0,		
+	GRADE_Bm,		
+	GRADE_Cp,		
+	GRADE_C0,		
+	GRADE_Cm,		
+	GRADE_Dp,		
+	GRADE_D0,		
+	GRADE_Dm,		
+	GRADE_F
+} smmGrade_e;
+
 //object generation
 void* smmObj_genObject(char* name, int objType, int type, int credit, int energy, int grade);
 char* smmObj_getObjectName(void *ptr);
@@ -56,6 +73,6 @@ char* smmObj_getTypeName(int node_type);
 
 
 //element to string
-
+char* smmObj_getGradeName(int grade);
 
 #endif/* smm_object_h */
